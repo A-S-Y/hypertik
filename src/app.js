@@ -1,121 +1,105 @@
 import { firebaseConfig } from './firebase-config.js';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  getIdTokenResult
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, getIdTokenResult
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 import {
-  getDatabase,
-  ref,
-  onValue,
-  update,
-  set,
-  query,
-  limitToLast
+  getDatabase, ref, onValue, update, set, query, limitToLast
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
+// Data Cache
+let accountsCache = {};
+let networksCache = {};
+let currentPhone = null;
+
 // DOM Elements
-const loginSection = document.getElementById('login-section');
 const sidebar = document.getElementById('sidebar');
 const mainContent = document.getElementById('main-content');
-const loginMsg = document.getElementById('login-msg');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const btnLogin = document.getElementById('btn-login');
-const btnSignout = document.getElementById('btn-signout');
-
-// Views
-const views = {
-  dashboard: document.getElementById('dashboard-view'),
-  accounts: document.getElementById('accounts-view'),
-  logs: document.getElementById('logs-view'),
-  detail: document.getElementById('account-detail-view')
-};
-
-// Navigation
-const navItems = {
-  dashboard: document.getElementById('nav-dashboard'),
-  accounts: document.getElementById('nav-accounts'),
-  logs: document.getElementById('nav-logs')
-};
-
-let accountsCache = {};
-let currentView = 'dashboard';
+const loginSection = document.getElementById('login-section');
+const navItems = document.querySelectorAll('.nav-item[data-view]');
+const themeToggle = document.getElementById('theme-toggle');
 
 // Init
 function init() {
-  Object.keys(navItems).forEach(key => {
-    navItems[key].addEventListener('click', (e) => {
+  // Navigation
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
       e.preventDefault();
-      showView(key);
+      showView(item.dataset.view);
     });
   });
 
-  btnLogin.addEventListener('click', handleLogin);
-  btnSignout.addEventListener('click', () => signOut(auth));
+  // Login
+  document.getElementById('btn-login').addEventListener('click', handleLogin);
+  document.getElementById('btn-signout').addEventListener('click', () => signOut(auth));
 
-  window.showView = showView; // Expose to global for button clicks
+  // Theme
+  themeToggle.addEventListener('click', toggleTheme);
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+
+  // Modals
+  window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+  document.getElementById('plan-form').addEventListener('submit', handlePlanSubmit);
+
+  window.showView = showView;
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const target = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', target);
+  localStorage.setItem('theme', target);
 }
 
 async function handleLogin() {
-  loginMsg.textContent = "جاري التحقق...";
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const msg = document.getElementById('login-msg');
+  msg.textContent = "جاري الدخول...";
   try {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-    if (!email || !password) {
-      loginMsg.textContent = "أدخل البريد وكلمة المرور";
-      return;
-    }
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
-    console.error(err);
-    loginMsg.textContent = "فشل الدخول: " + err.message;
+    msg.textContent = "فشل: " + err.message;
   }
 }
 
 function showView(viewId) {
-  Object.keys(views).forEach(key => {
-    views[key].style.display = key === viewId ? 'block' : 'none';
-  });
+  // Hide all views
+  document.querySelectorAll('section[id^="view-"]').forEach(s => s.style.display = 'none');
+  // Show target
+  const target = document.getElementById(`view-${viewId}`);
+  if (target) target.style.display = 'block';
 
-  Object.keys(navItems).forEach(key => {
-    navItems[key].classList.toggle('active', key === viewId);
-  });
+  // Active nav
+  navItems.forEach(n => n.classList.toggle('active', n.dataset.view === viewId));
 
-  const titles = {
-    dashboard: 'لوحة التحكم',
-    accounts: 'إدارة الحسابات',
-    logs: 'سجلات النشاط',
-    detail: 'تفاصيل الحساب'
-  };
-  document.getElementById('page-title').textContent = titles[viewId] || '';
-  currentView = viewId;
+  // Breadcrumbs/Titles
+  const titles = { dashboard: 'لوحة التحكم', accounts: 'إدارة الحسابات', 'new-users': 'مستخدمين جدد', networks: 'إدارة الشبكات', employees: 'إدارة الموظفين', logs: 'سجلات النشاط', detail: 'تفاصيل الحساب' };
+  document.getElementById('page-title').textContent = titles[viewId] || 'لوحة التحكم';
+
+  if (viewId === 'dashboard') renderDashboard();
+  if (viewId === 'networks') renderNetworks();
+  if (viewId === 'employees') renderEmployees();
 }
 
-// Auth state
+// Auth Observer
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    const tokenResult = await getIdTokenResult(user, true).catch(() => ({ claims: {} }));
-    const isAdmin = tokenResult && tokenResult.claims && tokenResult.claims.admin;
-
-    if (!isAdmin) {
-      alert('حسابك ليس لديه صلاحية المشرف.');
+    const res = await getIdTokenResult(user, true).catch(() => ({ claims: {} }));
+    if (!res.claims.admin) {
+      alert('لا تملك صلاحيات مسؤول.');
       await signOut(auth);
       return;
     }
-
     document.getElementById('admin-email').textContent = user.email;
     loginSection.style.display = 'none';
     sidebar.style.display = 'flex';
     mainContent.style.display = 'block';
-
     loadData();
   } else {
     loginSection.style.display = 'flex';
@@ -125,175 +109,186 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 function loadData() {
-  // Load Accounts
-  const accountsRef = ref(db, 'accounts');
-  onValue(accountsRef, (snapshot) => {
-    const data = snapshot.val() || {};
-    accountsCache = data;
-    renderDashboard(data);
-    renderAccounts(data);
+  onValue(ref(db, 'accounts'), (snap) => {
+    accountsCache = snap.val() || {};
+    renderDashboard();
+    renderAccounts();
+    renderNewUsers();
   });
 
-  // Load Recent Logs
-  const logsRef = query(ref(db, 'activities'), limitToLast(50));
-  onValue(logsRef, (snapshot) => {
-    const allActivities = snapshot.val() || {};
-    renderLogs(allActivities);
+  onValue(ref(db, 'networks'), (snap) => {
+    networksCache = snap.val() || {};
+    renderNetworks();
+  });
+
+  onValue(query(ref(db, 'activities'), limitToLast(50)), (snap) => {
+    renderLogs(snap.val() || {});
   });
 }
 
-function renderDashboard(data) {
-  const accounts = Object.values(data);
-  document.getElementById('total-accounts').textContent = accounts.length;
-  document.getElementById('premium-accounts').textContent = accounts.filter(a => a.isPremium).length;
-  document.getElementById('active-accounts').textContent = accounts.filter(a => a.isActive).length;
+// Rendering Logic
+function renderDashboard() {
+  const accs = Object.values(accountsCache);
+  document.getElementById('stat-total').textContent = accs.length;
+  document.getElementById('stat-active').textContent = accs.filter(a => a.isActive).length;
+  document.getElementById('stat-premium').textContent = accs.filter(a => a.isPremium).length;
 
-  const recentTbody = document.querySelector('#recent-accounts-table tbody');
-  recentTbody.innerHTML = '';
+  const tbody = document.querySelector('#recent-networks-table tbody');
+  tbody.innerHTML = '';
+  Object.entries(networksCache).slice(0, 5).forEach(([id, net]) => {
+    const row = `<tr><td>${net.name || '---'}</td><td>${net.ownerPhone || '---'}</td><td>${net.routers ? Object.keys(net.routers).length : 0}</td><td>${Object.values(net.routers || {})[0]?.ip || '---'}</td></tr>`;
+    tbody.innerHTML += row;
+  });
+}
 
-  // Sort by createdAt or take last 5
-  const sorted = Object.entries(data).sort((a, b) => {
-    return new Date(b[1].createdAt) - new Date(a[1].createdAt);
-  }).slice(0, 5);
-
-  sorted.forEach(([phone, acc]) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+function renderAccounts() {
+  const tbody = document.querySelector('#accounts-table tbody');
+  const query = document.getElementById('acc-search').value.toLowerCase();
+  tbody.innerHTML = '';
+  Object.entries(accountsCache).forEach(([phone, acc]) => {
+    if (query && !(`${phone} ${acc.name} ${acc.networkName}`.toLowerCase().includes(query))) return;
+    const row = document.createElement('tr');
+    row.innerHTML = `
       <td>${phone}</td>
       <td>${acc.name || '---'}</td>
       <td>${acc.networkName || '---'}</td>
+      <td><span class="badge badge-primary">${acc.plan?.name || 'بدون'}</span></td>
       <td><span class="badge ${acc.isActive ? 'badge-success' : 'badge-danger'}">${acc.isActive ? 'نشط' : 'معطل'}</span></td>
-      <td><button class="glass" style="padding: 5px 15px;" onclick="openDetail('${phone}')">فتح</button></td>
+      <td><button class="glass" onclick="openDetail('${phone}')">إدارة</button></td>
     `;
-    recentTbody.appendChild(tr);
+    tbody.appendChild(row);
   });
 }
 
-function renderAccounts(data) {
-  const tbody = document.querySelector('#accounts-table tbody');
-  const filter = document.getElementById('filter').value.toLowerCase();
+document.getElementById('acc-search').addEventListener('input', renderAccounts);
+
+function renderNewUsers() {
+  const tbody = document.querySelector('#new-users-table tbody');
   tbody.innerHTML = '';
-
-  Object.entries(data).forEach(([phone, acc]) => {
-    const searchStr = `${phone} ${acc.name || ''} ${acc.networkName || ''}`.toLowerCase();
-    if (filter && !searchStr.includes(filter)) return;
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td style="font-weight: 600;">${phone}</td>
-      <td>${acc.name || '---'}</td>
-      <td>${acc.networkName || '---'}</td>
-      <td><span class="badge badge-primary">${acc.plan ? acc.plan.name : 'بدون خطة'}</span></td>
-      <td><span class="badge ${acc.isActive ? 'badge-success' : 'badge-danger'}">${acc.isActive ? 'نشط' : 'معطل'}</span></td>
-      <td>${acc.createdAt ? acc.createdAt.split(' ')[0] : '---'}</td>
-      <td>
-        <button class="glass" style="padding: 8px 15px;" onclick="openDetail('${phone}')">إدارة</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
+  // Let's define new users as those without isActive or created in last 7 days
+  Object.entries(accountsCache).forEach(([phone, acc]) => {
+    if (!acc.isActive) {
+      tbody.innerHTML += `<tr><td>${phone}</td><td>${acc.name || '---'}</td><td>${acc.createdAt?.split(' ')[0] || '---'}</td><td><button class="btn-primary" onclick="openDetail('${phone}')">تفعيل</button></td></tr>`;
+    }
   });
 }
 
-document.getElementById('filter').addEventListener('input', () => {
-  renderAccounts(accountsCache);
-});
+function renderNetworks() {
+  const tbody = document.querySelector('#networks-table tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  Object.entries(networksCache).forEach(([id, net]) => {
+    const routers = net.routers ? Object.values(net.routers) : [];
+    tbody.innerHTML += `<tr>
+            <td>${id}</td>
+            <td style="font-weight:600">${net.name || '---'}</td>
+            <td>${net.ownerPhone || '---'}</td>
+            <td>${routers[0]?.ip || '---'}</td>
+            <td>${routers.length}</td>
+        </tr>`;
+  });
+}
 
-function renderLogs(allActivities) {
+function renderEmployees() {
+  const tbody = document.querySelector('#employees-table tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  Object.entries(accountsCache).forEach(([phone, acc]) => {
+    if (acc.employees) {
+      Object.values(acc.employees).forEach(emp => {
+        tbody.innerHTML += `<tr>
+                    <td>${emp.name}</td>
+                    <td>${emp.id}</td>
+                    <td>${phone} (${acc.name || '---'})</td>
+                    <td>${Object.keys(emp.permissions || {}).length} صلاحيات</td>
+                </tr>`;
+      });
+    }
+  });
+}
+
+function renderLogs(logs) {
   const tbody = document.querySelector('#logs-table tbody');
+  if (!tbody) return;
   tbody.innerHTML = '';
-
-  const flatLogs = [];
-  Object.entries(allActivities).forEach(([id, deviceLogs]) => {
-    Object.entries(deviceLogs).forEach(([logId, log]) => {
-      flatLogs.push({ ...log, logId, deviceId: id });
+  const flat = [];
+  Object.entries(logs).forEach(([dev, devLogs]) => {
+    Object.values(devLogs).forEach(l => flat.push({ ...l, deviceId: dev }));
+  });
+  flat.sort((a, b) => new Date(b.timestamp || b.time) - new Date(a.timestamp || a.time))
+    .slice(0, 50).forEach(l => {
+      tbody.innerHTML += `<tr><td>${(l.timestamp || l.time || '').split('.')[0]}</td><td><span class="badge badge-primary">${l.action || l.type || 'إجراء'}</span></td><td>${l.details || '---'}</td><td>${l.deviceId}</td></tr>`;
     });
+}
+
+// Detail View
+window.openDetail = (phone) => {
+  currentPhone = phone;
+  const acc = accountsCache[phone];
+  showView('detail');
+  document.getElementById('det-name').textContent = acc.name || 'بدون اسم';
+  document.getElementById('det-phone').textContent = phone;
+
+  const actBtn = document.getElementById('btn-toggle-active');
+  actBtn.className = acc.isActive ? 'btn-primary badge-danger' : 'btn-primary badge-success';
+  actBtn.textContent = acc.isActive ? 'تعطيل الحساب' : 'تفعيل الحساب';
+  actBtn.onclick = () => update(ref(db, `accounts/${phone}`), { isActive: !acc.isActive });
+
+  document.getElementById('btn-open-plan').onclick = () => openPlanModal(acc.plan || {});
+
+  // Routers
+  const rList = document.getElementById('det-routers');
+  rList.innerHTML = '';
+  if (acc.routersID) Object.keys(acc.routersID).forEach(rid => {
+    rList.innerHTML += `<li class="glass" style="margin-bottom:8px; padding:10px; display:flex; justify-content:space-between;">${rid} <button style="color:red; background:none;" onclick="removeRouter('${phone}', '${rid}')">🗑️</button></li>`;
   });
 
-  flatLogs.sort((a, b) => new Date(b.timestamp || b.time) - new Date(a.timestamp || a.time))
-    .slice(0, 100)
-    .forEach(log => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-            <td style="font-size: 0.8rem; color: var(--text-muted);">${log.timestamp || log.time || '---'}</td>
-            <td><span class="badge badge-primary">${log.action || log.type || 'إجراء'}</span></td>
-            <td style="font-size: 0.9rem;">${log.details || '---'}</td>
-            <td style="font-size: 0.8rem; color: var(--primary);">${log.deviceId}</td>
-        `;
-      tbody.appendChild(tr);
-    });
+  // Employees
+  const eList = document.getElementById('det-employees');
+  eList.innerHTML = '';
+  if (acc.employees) Object.values(acc.employees).forEach(emp => {
+    eList.innerHTML += `<li class="glass" style="margin-bottom:8px; padding:10px;">${emp.name} (${emp.id})</li>`;
+  });
+};
+
+window.removeRouter = (phone, rid) => {
+  if (confirm('هل أنت متأكد؟')) set(ref(db, `accounts/${phone}/routersID/${rid}`), null);
+};
+
+// Plan Modal
+function openPlanModal(plan) {
+  const modal = document.getElementById('modal-plan');
+  const form = document.getElementById('plan-form');
+  modal.style.display = 'flex';
+
+  // Fill fields
+  const fields = ['name', 'type', 'startDate', 'endDate', 'maxRouters', 'maxDevices', 'maxExports', 'maxFetches'];
+  fields.forEach(f => {
+    form.elements[f].value = plan[f] || '';
+  });
+  form.elements.allowMultiAccess.checked = !!plan.allowMultiAccess;
 }
 
-async function openDetail(phone) {
-  const acc = accountsCache[phone];
-  if (!acc) return;
+async function handlePlanSubmit(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const plan = {};
+  fd.forEach((val, key) => {
+    if (['maxRouters', 'maxDevices', 'maxExports', 'maxFetches'].includes(key)) {
+      plan[key] = parseInt(val) || 0;
+    } else {
+      plan[key] = val;
+    }
+  });
+  plan.allowMultiAccess = e.target.elements.allowMultiAccess.checked;
 
-  showView('detail');
-
-  document.getElementById('detail-phone').textContent = phone;
-  document.getElementById('detail-name').textContent = acc.name || 'مستخدم بدون اسم';
-  document.getElementById('detail-network-name').textContent = acc.networkName || '---';
-  document.getElementById('detail-public-id').textContent = acc.publicNetworkId || '---';
-
-  const planName = acc.plan ? acc.plan.name : 'بدون خطة';
-  document.getElementById('detail-plan-name').textContent = planName;
-  document.getElementById('detail-plan-end').textContent = (acc.plan && acc.plan.endDate) || '---';
-  document.getElementById('detail-max-routers').textContent = (acc.plan && acc.plan.maxRouters) || '---';
-
-  const toggleBtn = document.getElementById('toggle-active');
-  toggleBtn.textContent = acc.isActive ? 'تعطيل الحساب' : 'تنشيط الحساب';
-  toggleBtn.onclick = async () => {
-    const newVal = !acc.isActive;
-    await update(ref(db, `accounts/${phone}`), { isActive: newVal });
-    alert('تم تحديث الحالة');
-  };
-
-  const routersList = document.getElementById('detail-routers-list');
-  routersList.innerHTML = '';
-  if (acc.routersID) {
-    Object.keys(acc.routersID).forEach(id => {
-      const li = document.createElement('li');
-      li.className = 'glass';
-      li.style.padding = '10px 15px';
-      li.style.marginBottom = '10px';
-      li.style.display = 'flex';
-      li.style.justifyContent = 'space-between';
-      li.innerHTML = `<span>${id}</span> <button style="color: var(--accent); background: none;" onclick="removeRouter('${phone}', '${id}')">حذف</button>`;
-      routersList.appendChild(li);
-    });
+  try {
+    await update(ref(db, `accounts/${currentPhone}/plan`), plan);
+    alert('تم تحديث الخطة بنجاح');
+    closeModal('modal-plan');
+  } catch (err) {
+    alert('خطأ: ' + err.message);
   }
-
-  const employeesList = document.getElementById('detail-employees-list');
-  employeesList.innerHTML = '';
-  if (acc.employees) {
-    Object.values(acc.employees).forEach(emp => {
-      const li = document.createElement('li');
-      li.className = 'glass';
-      li.style.padding = '10px 15px';
-      li.style.marginBottom = '10px';
-      li.innerHTML = `<div>${emp.name}</div><div style="font-size: 0.7rem; color: var(--text-muted);">ID: ${emp.id}</div>`;
-      employeesList.appendChild(li);
-    });
-  }
-
-  document.getElementById('btn-edit-plan').onclick = async () => {
-    const newEnd = prompt('تاريخ الانتهاء الجديد (YYYY-MM-DD):', (acc.plan && acc.plan.endDate) || '');
-    if (!newEnd) return;
-    await update(ref(db, `accounts/${phone}/plan`), { endDate: newEnd });
-  };
-
-  document.getElementById('btn-add-router').onclick = async () => {
-    const routerId = prompt('أدخل معرف الراوتر (Router ID):');
-    if (!routerId) return;
-    await set(ref(db, `accounts/${phone}/routersID/${routerId}`), true);
-  };
 }
-
-async function removeRouter(phone, routerId) {
-  if (!confirm(`هل أنت متأكد من حذف الراوتر ${routerId}؟`)) return;
-  await set(ref(db, `accounts/${phone}/routersID/${routerId}`), null);
-}
-
-window.openDetail = openDetail;
-window.removeRouter = removeRouter;
 
 init();
