@@ -108,11 +108,17 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
+let usersCache = {};
+
 function loadData() {
   onValue(ref(db, 'accounts'), (snap) => {
     accountsCache = snap.val() || {};
     renderDashboard();
     renderAccounts();
+  });
+
+  onValue(ref(db, 'users'), (snap) => {
+    usersCache = snap.val() || {};
     renderNewUsers();
   });
 
@@ -129,6 +135,7 @@ function loadData() {
 // Rendering Logic
 function renderDashboard() {
   const accs = Object.values(accountsCache);
+  const usrs = Object.values(usersCache);
   document.getElementById('stat-total').textContent = accs.length;
   document.getElementById('stat-active').textContent = accs.filter(a => a.isActive).length;
   document.getElementById('stat-premium').textContent = accs.filter(a => a.isPremium).length;
@@ -143,10 +150,10 @@ function renderDashboard() {
 
 function renderAccounts() {
   const tbody = document.querySelector('#accounts-table tbody');
-  const query = document.getElementById('acc-search').value.toLowerCase();
+  const queryVal = document.getElementById('acc-search').value.toLowerCase();
   tbody.innerHTML = '';
   Object.entries(accountsCache).forEach(([phone, acc]) => {
-    if (query && !(`${phone} ${acc.name} ${acc.networkName}`.toLowerCase().includes(query))) return;
+    if (queryVal && !(`${phone} ${acc.name} ${acc.networkName}`.toLowerCase().includes(queryVal))) return;
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${phone}</td>
@@ -164,12 +171,21 @@ document.getElementById('acc-search').addEventListener('input', renderAccounts);
 
 function renderNewUsers() {
   const tbody = document.querySelector('#new-users-table tbody');
+  if (!tbody) return;
   tbody.innerHTML = '';
-  // Let's define new users as those without isActive or created in last 7 days
-  Object.entries(accountsCache).forEach(([phone, acc]) => {
-    if (!acc.isActive) {
-      tbody.innerHTML += `<tr><td>${phone}</td><td>${acc.name || '---'}</td><td>${acc.createdAt?.split(' ')[0] || '---'}</td><td><button class="btn-primary" onclick="openDetail('${phone}')">تفعيل</button></td></tr>`;
-    }
+
+  Object.entries(usersCache).forEach(([deviceId, user]) => {
+    // Only show if not already an "Account" (checking by phone if exists or if it's just a raw visitor)
+    const isAccount = Object.keys(accountsCache).some(p => p === user.phone);
+
+    tbody.innerHTML += `<tr>
+            <td style="font-size:12px">${deviceId}</td>
+            <td style="font-weight:600">${user.name || 'زائر جديد'}</td>
+            <td>${user.firstLogin?.split(' ')[0] || '---'}</td>
+            <td>
+                <button class="btn-primary" style="padding:6px 12px; font-size:12px;" onclick="convertUserToAccount('${deviceId}')">تفعيل كحساب</button>
+            </td>
+        </tr>`;
   });
 }
 
@@ -254,6 +270,34 @@ window.openDetail = (phone) => {
 window.removeRouter = (phone, rid) => {
   if (confirm('هل أنت متأكد؟')) set(ref(db, `accounts/${phone}/routersID/${rid}`), null);
 };
+
+async function convertUserToAccount(deviceId) {
+  const user = usersCache[deviceId];
+  if (!user) return;
+
+  const phone = prompt('أدخل رقم الهاتف لربطه بهذا الجهاز:', user.phone || '');
+  if (!phone) return;
+
+  if (accountsCache[phone]) {
+    if (!confirm('هذا الحساب موجود بالفعل. هل تريد إضافة هذا الجهاز إليه؟')) return;
+    await set(ref(db, `accounts/${phone}/routersID/${deviceId}`), true);
+  } else {
+    const name = prompt('أدخل اسم صاحب الحساب:', user.name || '');
+    const newAcc = {
+      phone: phone,
+      name: name,
+      createdAt: new Date().toISOString().replace('T', ' ').split('.')[0],
+      isActive: true,
+      isPremium: false,
+      routersID: { [deviceId]: true },
+      plan: user.trialPlan || { name: 'تجريبي', type: 'trial', endDate: '2026-01-30' }
+    };
+    await set(ref(db, `accounts/${phone}`), newAcc);
+  }
+  alert('تم تفعيل الحساب بنجاح');
+}
+
+window.convertUserToAccount = convertUserToAccount;
 
 // Plan Modal
 function openPlanModal(plan) {
