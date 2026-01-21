@@ -1,0 +1,7 @@
+service-account.json
+node_modules/
+*.log
+.gemini/
+.DS_Store
+dist/
+build/
