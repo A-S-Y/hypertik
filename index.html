@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>لوحة إدارة Hyper-Tik</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body dir="rtl">
+  <div id="app">
+    <header>
+      <h1>لوحة إدارة Hyper-Tik</h1>
+      <div id="auth">
+        <button id="btn-signout" style="display:none">تسجيل خروج</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="login-section">
+        <h2>تسجيل دخول المسؤول</h2>
+        <input id="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
+        <button id="btn-login">دخول</button>
+        <div id="login-msg" class="muted"></div>
+      </section>
+
+      <section id="dashboard" style="display:none">
+        <h2>لوحة</h2>
+        <div id="stats" class="card"></div>
+
+        <h3>قائمة الحسابات</h3>
+        <input id="filter" placeholder="بحث برقم الهاتف أو الاسم" />
+        <table id="accounts-table" border="1">
+          <thead>
+            <tr><th>الهاتف</th><th>الاسم</th><th>الشبكة</th><th>نشط</th><th>خطة</th><th>إجراءات</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="account-detail" style="display:none">
+        <button id="back-to-list">العودة إلى القائمة</button>
+        <h2>تفاصيل الحساب: <span id="detail-phone"></span></h2>
+        <div id="detail-general" class="card"></div>
+        <div id="detail-plan" class="card"></div>
+        <div id="detail-routers" class="card"></div>
+        <div id="detail-employees" class="card"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>مصمم لإدارة بيانات Realtime DB — تأكد من قواعد الأمان قبل الاستخدام في الإنتاج.</small>
+    </footer>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

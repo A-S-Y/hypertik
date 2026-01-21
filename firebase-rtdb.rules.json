@@ -1,0 +1,7 @@
+{
+  "rules": {
+    // الوصول العام مقيد للمستخدمين الذين لديهم claim admin === true
+    ".read": "auth != null && auth.token.admin === true",
+    ".write": "auth != null && auth.token.admin === true"
+  }
+}
