@@ -1,0 +1,1040 @@
+{
+  "accounts": {
+    "716468028": {
+      "createdAt": "2026-01-17 08:08:58.505337",
+      "employees": {
+        "EMP_001": {
+          "id": "001",
+          "name": "asaad",
+          "password": "123",
+          "permissions": {
+            "canaddusers": true,
+            "canexportandimortbackup": true,
+            "canexportandsavereport": true,
+            "canopenbackupsystemscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenbulkaddscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopengeneralsalescreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopennetworkmapscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenposnotesscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenpossalesscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopensavedfilesscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopensavedreportsscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenstatsscreen": {
+              "canOpen": true,
+              "show": true
+            }
+          }
+        }
+      },
+      "isActive": true,
+      "isPremium": false,
+      "name": "asaad",
+      "networkName": "abo obidah",
+      "password": "775359969",
+      "phone": "716468028",
+      "plan": {
+        "allowMultiAccess": true,
+        "endDate": "2026-02-16",
+        "maxDevices": 1,
+        "maxExports": 20,
+        "maxFetches": 20,
+        "maxRouters": 1,
+        "name": "تجريبي لمدة شهر",
+        "startDate": "2026-01-17",
+        "type": "monthly_multi"
+      },
+      "publicNetworkId": "NFS506338",
+      "routersID": {
+        "HFA091BT3E0": true
+      },
+      "usage": {
+        "bulk_cards": 0,
+        "exports": 0,
+        "fetches": 0
+      }
+    },
+    "771234567": {
+      "createdAt": "2026-01-13 22:30:00",
+      "deviceId": "DEVICE_ID_ABC123",
+      "employees": {
+        "EMP_001": {
+          "id": "001",
+          "name": "أحمد",
+          "password": "123456",
+          "permissions": {
+            "allowedRouters": {
+              "RTR_001": true
+            },
+            "canexportandimortbackup": true,
+            "canexportandsavereport": true,
+            "canopenbackupsystemscreen": true,
+            "canopenbulkaddscreen": true,
+            "canopengeneralsalescreen": true,
+            "canopennetworkmapscreen": true,
+            "canopenposnotesscreen": true,
+            "canopenpossalesscreen": true,
+            "canopensavedfilesscreen": true,
+            "canopensavedreportsscreen": true,
+            "canopenstatsscreen": true
+          }
+        }
+      },
+      "isActive": true,
+      "networkName": "شبكة الأمل",
+      "password": "user_pass_123",
+      "phone": "771234567",
+      "plan": {
+        "allowMultiAccess": true,
+        "endDate": "2026-02-13",
+        "maxBulkAdd": -1,
+        "maxDevices": 5,
+        "maxExports": -1,
+        "maxFetches": -1,
+        "maxRouters": 1,
+        "name": "شهري متعدد",
+        "startDate": "2026-01-13",
+        "type": "monthly_multi"
+      },
+      "publicNetworkId": "NET_9988",
+      "routersID": {
+        "RTR_001": true
+      },
+      "usage": {
+        "exports": 5,
+        "fetches": 10,
+        "lastAction": "2026-01-13 23:30:00"
+      }
+    },
+    "775359969": {
+      "createdAt": "2026-01-16 02:08:36.303827",
+      "devices": {
+        "PPR1_180610_011": true
+      },
+      "employees": {
+        "EMP_001": {
+          "id": "001",
+          "name": "أسعد",
+          "password": "123",
+          "permissions": {
+            "allowedRouters": {
+              "HEN08KQX4Y1": true,
+              "HFA091BT3E0": true
+            },
+            "canexportandimortbackup": true,
+            "canexportandsavereport": true,
+            "canopenbackupsystemscreen": true,
+            "canopenbulkaddscreen": true,
+            "canopengeneralsalescreen": true,
+            "canopennetworkmapscreen": true,
+            "canopenposnotesscreen": true,
+            "canopenpossalesscreen": true,
+            "canopensavedfilesscreen": true,
+            "canopensavedreportsscreen": true,
+            "canopenstatsscreen": true
+          }
+        },
+        "EMP_71646": {
+          "id": "71646",
+          "name": "حمود ",
+          "password": "123",
+          "permissions": {
+            "allowedRouters": {
+              "HEN08KQX4Y1": true,
+              "HFA091BT3E0": true
+            },
+            "canexportandimortbackup": false,
+            "canexportandsavereport": true,
+            "canopenbackupsystemscreen": {
+              "canOpen": false,
+              "show": false
+            },
+            "canopenbulkaddscreen": {
+              "canOpen": false,
+              "show": false
+            },
+            "canopengeneralsalescreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopennetworkmapscreen": {
+              "canOpen": false,
+              "show": true
+            },
+            "canopenposnotesscreen": {
+              "canOpen": false,
+              "show": false
+            },
+            "canopenpossalesscreen": {
+              "canOpen": false,
+              "show": false
+            },
+            "canopensavedfilesscreen": {
+              "canOpen": false,
+              "show": false
+            },
+            "canopensavedreportsscreen": {
+              "canOpen": false,
+              "show": false
+            },
+            "canopenstatsscreen": {
+              "canOpen": true,
+              "show": true
+            }
+          }
+        }
+      },
+      "isActive": true,
+      "isPremium": false,
+      "name": "أسعد",
+      "networkName": "شبكة ابو عبيدة",
+      "password": "775359969",
+      "phone": "775359969",
+      "plan": {
+        "allowMultiAccess": true,
+        "endDate": "2026-02-15",
+        "maxDevices": 99,
+        "maxExports": 999,
+        "maxFetches": 999,
+        "maxRouters": 3,
+        "name": "مدى الحياة",
+        "startDate": "2026-01-16",
+        "type": "monthly_multi"
+      },
+      "publicNetworkId": "NET_516303",
+      "routersID": {
+        "HEN08KQX4Y1": true,
+        "HFA091BT3E0": true
+      },
+      "usage": {
+        "bulk_cards": 3,
+        "exports": 10,
+        "fetches": 12
+      }
+    },
+    "777657706": {
+      "createdAt": "2026-01-18 07:52:45.576375",
+      "employees": {
+        "EMP_001": {
+          "id": "001",
+          "name": "sa",
+          "password": "123",
+          "permissions": {
+            "canaddusers": true,
+            "canexportandimortbackup": true,
+            "canexportandsavereport": true,
+            "canopenbackupsystemscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenbulkaddscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopengeneralsalescreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopennetworkmapscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenposnotesscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenpossalesscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopensavedfilesscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopensavedreportsscreen": {
+              "canOpen": true,
+              "show": true
+            },
+            "canopenstatsscreen": {
+              "canOpen": true,
+              "show": true
+            }
+          }
+        }
+      },
+      "isActive": true,
+      "isPremium": false,
+      "name": "sa",
+      "networkName": "gs",
+      "password": "123",
+      "phone": "777657706",
+      "plan": {
+        "allowMultiAccess": true,
+        "endDate": "2026-02-17",
+        "maxDevices": 1,
+        "maxExports": 20,
+        "maxFetches": 20,
+        "maxRouters": 1,
+        "name": "تجريبي لمدة شهر",
+        "startDate": "2026-01-18",
+        "type": "monthly_multi"
+      },
+      "publicNetworkId": "NFS576954",
+      "routersID": {
+        "placeholder": true
+      },
+      "usage": {
+        "bulk_cards": 0,
+        "exports": 0,
+        "fetches": 0
+      }
+    }
+  },
+  "activities": {
+    "771234567": {
+      "ACT_001": {
+        "details": "تم الدخول من جهاز Samsung S21",
+        "time": "2026-01-13 22:30:00",
+        "type": "تسجيل دخول"
+      }
+    },
+    "AP3A_240905_015_A2": {
+      "-OitiZ7tBfgnmE6HAr4d": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-14 02:39:10.263781"
+      },
+      "-Oitisr9LKtDJ8vEZiYp": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:40:35.146017"
+      },
+      "-OitjqErCBtp_EY2Li0G": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 8456 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:44:46.583751"
+      },
+      "-Oitk1Lh1cTxUppONXzX": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 8456 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:45:36.173529"
+      },
+      "-OitkF-6FBaXF3vvVR4p": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 8456 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:46:32.071156"
+      },
+      "-OitkHlbaX-ACGFtolO-": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:46:43.430797"
+      },
+      "-OitkRrtJB2CtXanOGg1": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 8456 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:47:24.793808"
+      },
+      "-Oitm4X5f8nBxj4CZ8q6": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 02:54:33.477070"
+      },
+      "-Oito9Rh3WVzA5Pbg6pq": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 03:03:37.899242"
+      },
+      "-OitshmWMECJT5sl35Pg": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 03:23:31.231860"
+      },
+      "-OitugbrHHvnTB_G4M1y": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 03:32:10.741214"
+      },
+      "-Oitv0N4YpwXHpIN-kDA": {
+        "action": "تصدير تقرير",
+        "details": "تصدير تقرير (تقرير يومي) للفئة (general)",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 03:33:35.749469"
+      },
+      "-Oitv894ZtHTnDR6BxuF": {
+        "action": "تصدير تقرير",
+        "details": "تصدير تقرير (تقرير شهري) للفئة (general)",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 03:34:07.621234"
+      },
+      "-OivSPv9IZHJw8mUA6FQ": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 10:43:30.506707"
+      },
+      "-OivT9iQ0OqDNoMHXwmY": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 10:46:46.299094"
+      },
+      "-OivUOFWeEBwjm4uRtrn": {
+        "action": "إنشاء كروت جماعية",
+        "details": "تم إنشاء 56 كرت بنجاح للبروفايل 200",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 10:52:07.969078"
+      },
+      "-OivWOzWq5o0TidXQMsk": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 11:00:55.265590"
+      },
+      "-OivX8AG70nICyPFphb3": {
+        "action": "إنشاء كروت جماعية",
+        "details": "تم إنشاء 56 كرت بنجاح للبروفايل 300",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 11:04:08.529881"
+      },
+      "-OiwSJEDGZu9FrKY4LbS": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 15:22:40.334002"
+      },
+      "-OiwUhxZCfCrr-RLXjV6": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 8782 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-14 15:33:09.988117"
+      },
+      "-Oj2lb3FKRn8FszXpT9h": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 01:28:40.844536"
+      },
+      "-Oj2nWQREplyRgPrcFxO": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 01:37:02.042396"
+      },
+      "-Oj2oj2_C87nMK0je107": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 01:42:20.003991"
+      },
+      "-Oj2po6vJll9_aWNJzhF": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 10348 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 01:47:02.907486"
+      },
+      "-Oj2tbiWgqv5kskxl14N": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:03:40.702680"
+      },
+      "-Oj2u9eJOwn14sA83hjM": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:06:03.795060"
+      },
+      "-Oj2uTj_dk0jYA3lpbBY": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:07:26.051069"
+      },
+      "-Oj2uaJGexRz0ibz26vo": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:07:57.072727"
+      },
+      "-Oj2uvjMpGeXP56x4ipx": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:09:24.822817"
+      },
+      "-Oj2vE2nwXsbVFMn5UC1": {
+        "action": "تصدير تقرير",
+        "details": "تصدير تقرير (تقرير يومي) للفئة (general)",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:10:43.954633"
+      },
+      "-Oj2vwKLVf45BLHKchWi": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:13:49.398638"
+      },
+      "-Oj2wd75jRCycYsKNV5I": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:16:52.870004"
+      },
+      "-Oj2ygFeJ09Rt9f5wWF8": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:25:49.992175"
+      },
+      "-Oj2z2jqrKALSSntJGRk": {
+        "action": "تصدير تقرير",
+        "details": "تصدير تقرير (تقرير يومي) للفئة (general)",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:27:26.197880"
+      },
+      "-Oj3132iYLMElDx4-Aat": {
+        "action": "تصدير تقرير",
+        "details": "تصدير تقرير (تقرير شهري) للفئة (general)",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:40:33.901924"
+      },
+      "-Oj32-x1hTxjEXVsuGZv": {
+        "action": "تسجيل الخروج",
+        "details": "تم تسجيل الخروج وإلغاء ربط الجهاز بالحساب: 775359969",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:44:43.329142"
+      },
+      "-Oj32BS04KUoYE5rfcic": {
+        "action": "تسجيل الدخول",
+        "details": "تم تسجيل الدخول وربط الجهاز بالحساب: 775359969",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:45:30.432586"
+      },
+      "-Oj34KMNORMGBY9MpetI": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:54:51.224126"
+      },
+      "-Oj35BfUcmnrxQZETEAp": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 02:58:37.791119"
+      },
+      "-Oj38hiIgnwashJzNplC": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:13:59.570020"
+      },
+      "-Oj38tkT39UxnoS6EYBV": {
+        "action": "تسجيل الخروج",
+        "details": "تم تسجيل الخروج وإلغاء ربط الجهاز بالحساب: 775359969",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:14:48.861728"
+      },
+      "-Oj38x60exjY-dezsfka": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:15:02.592670"
+      },
+      "-Oj3BSjR7hTZalsReLuQ": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:26:00.539931"
+      },
+      "-Oj3BZge7q_4RH11KqdT": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:26:29.033904"
+      },
+      "-Oj3Bcz9v6l8zWHrOHNn": {
+        "action": "تسجيل الدخول",
+        "details": "تم تسجيل الدخول وربط الجهاز بالحساب: 775359969",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:26:46.601825"
+      },
+      "-Oj3Bfbr5MVxyPbGcMaQ": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:26:57.398775"
+      },
+      "-Oj3BtWdznnmvhGxmZ2S": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HEN08KQX4Y1 بنجاح",
+        "routerId": "HEN08KQX4Y1",
+        "timestamp": "2026-01-16 03:27:54.345082"
+      },
+      "-Oj3H6aDR7wfqw0b5QuI": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 03:50:42.700751"
+      },
+      "-Oj3HEacqllwjZOEvYZ5": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-16 03:51:15.495893"
+      },
+      "-OjVxj2m9x_UVjeUtKgQ": {
+        "action": "دخول تلقائي محلي",
+        "details": "تم تسجيل الدخول التلقائي للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 17:30:38.578028",
+        "userName": "أسعد"
+      },
+      "-OjVzbToFF3tR2rYCRv0": {
+        "action": "تسجيل الدخول",
+        "details": "تم تسجيل الدخول وربط الجهاز بالحساب: 775359969",
+        "timestamp": "2026-01-21 17:38:51.828793",
+        "userName": "أسعد"
+      },
+      "-OjVzdN9VGzhwHgy9b53": {
+        "action": "دخول مخصص",
+        "details": "تم تسجيل الدخول للراوتر راوتر (hen08kqx4y1.sn.mynetname.net) بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 17:38:59.594904",
+        "userName": "أسعد"
+      },
+      "-OjVziYDn0ka2dtFXcKm": {
+        "action": "تسجيل الخروج",
+        "details": "تم تسجيل الخروج وإلغاء ربط الجهاز بالحساب: 775359969",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 17:39:20.781988",
+        "userName": "أسعد"
+      },
+      "-OjW0PQamMN32ZXVTUSd": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 17:46:42.662373",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjW1S1d2yJek__B4IlY": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 17:51:15.497532",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjWDpkP3vdDord1w1SB": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 18:45:22.458235",
+        "userName": "مستخدم تجريبي"
+      }
+    },
+    "T_R4T2_1753706367": {
+      "-OjWhAU_eJV_X1Ktj8pO": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 20:57:55.811601",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjWo9mHp3sgrDHhBsQl": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 21:28:27.919831",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjWoU21GnB-sC4tO5On": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 15872 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-21 21:29:50.835895",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjXNQauljhh9qQ9xxL8": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-22 00:06:54.009960",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjXPXkJoaQmMEQ60HXN": {
+        "action": "دخول تلقائي محلي",
+        "details": "تم تسجيل الدخول التلقائي للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-22 00:16:07.572112",
+        "userName": "مستخدم تجريبي"
+      }
+    },
+    "U_R4T2_1751776306": {
+      "-OjXgBSPWOmK2X_jFUSD": {
+        "action": "دخول محلي",
+        "details": "تم تسجيل الدخول للراوتر HFA091BT3E0 بنجاح",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-22 01:33:14.842423",
+        "userName": "مستخدم تجريبي"
+      },
+      "-OjXgUmOZixM41l5utlc": {
+        "action": "جلب من الراوتر",
+        "details": "تم جلب 16061 جلسة بنجاح من الراوتر",
+        "routerId": "HFA091BT3E0",
+        "timestamp": "2026-01-22 01:34:34.009377",
+        "userName": "مستخدم تجريبي"
+      }
+    }
+  },
+  "deviceRouters": {
+    "AP3A_240905_015_A2": {
+      "HEN08KQX4Y1": {
+        "addedAt": "2026-01-20 01:22:09.852333",
+        "deviceId": "AP3A_240905_015_A2",
+        "permissions": "full",
+        "routerId": "HEN08KQX4Y1"
+      },
+      "HFA091BT3E0": {
+        "addedAt": "2026-01-21 18:45:18.773673",
+        "deviceId": "AP3A_240905_015_A2",
+        "permissions": "full",
+        "routerId": "HFA091BT3E0"
+      }
+    },
+    "DEVICE_ID_ABC123": {
+      "RTR_001": {
+        "addedAt": "2026-01-13 22:35:00",
+        "deviceId": "DEVICE_ID_ABC123",
+        "permissions": "full",
+        "routerId": "RTR_001"
+      }
+    },
+    "PPR1_180610_011": {
+      "HFA091BT3E0": {
+        "addedAt": "2026-01-18 02:11:38.035158",
+        "deviceId": "PPR1_180610_011",
+        "permissions": "full",
+        "routerId": "HFA091BT3E0"
+      }
+    },
+    "T_R4T2_1753706367": {
+      "HFA091BT3E0": {
+        "addedAt": "2026-01-22 00:16:06.497080",
+        "deviceId": "T_R4T2_1753706367",
+        "permissions": "full",
+        "routerId": "HFA091BT3E0"
+      }
+    },
+    "U_R4T2_1751776306": {
+      "HFA091BT3E0": {
+        "addedAt": "2026-01-22 01:33:05.686735",
+        "deviceId": "U_R4T2_1751776306",
+        "permissions": "full",
+        "routerId": "HFA091BT3E0"
+      }
+    }
+  },
+  "employeeActivities": {
+    "NET_9988": {
+      "EMP_001": {
+        "ACT_E_001": {
+          "details": "تم الجلب من راوتر المركز",
+          "routerName": "راوتر المركز",
+          "time": "2026-01-13 23:35:00",
+          "type": "جلب كروت"
+        }
+      }
+    }
+  },
+  "networks": {
+    "NET_516303": {
+      "name": "شبكة ابو عبيدة",
+      "ownerPhone": "775359969",
+      "publicNetworkId": "NET_516303",
+      "routers": {
+        "HEN08KQX4Y1": {
+          "id": "HEN08KQX4Y1",
+          "ip": "192.168.254.1",
+          "name": "راوتر (192.168.254.1)",
+          "password": "775359969",
+          "port": 8765,
+          "username": "11"
+        },
+        "HFA091BT3E0": {
+          "id": "HFA091BT3E0",
+          "ip": "10.0.0.1",
+          "name": "راوتر (hen08kqx4y1.sn.mynetname.net)",
+          "password": "7753599691",
+          "port": 8728,
+          "username": "admin"
+        }
+      }
+    },
+    "NET_9988": {
+      "name": "شبكة الأمل",
+      "ownerPhone": "771234567",
+      "publicNetworkId": "NET_9988",
+      "routers": {
+        "RTR_001": {
+          "ip": "10.10.10.1",
+          "name": "راوتر المركز",
+          "password": "router_pass_1",
+          "port": 8728,
+          "username": "admin"
+        },
+        "RTR_002": {
+          "ip": "10.10.10.2",
+          "name": "راوتر الفرع",
+          "password": "router_pass_2",
+          "port": 8728,
+          "username": "admin"
+        }
+      }
+    },
+    "NFS506338": {
+      "routers": {
+        "HFA091BT3E0": {
+          "id": "HFA091BT3E0",
+          "ip": "hen08kqx4y1.sn.mynetname.net",
+          "name": "راوتر (hen08kqx4y1.sn.mynetname.net)",
+          "password": "775359969",
+          "port": 8002,
+          "username": "alsiynii"
+        }
+      }
+    }
+  },
+  "routers": {
+    "HEN08KQX4Y1": {
+      "firstAccess": "2026-01-20 01:21:13.110735",
+      "id": "HEN08KQX4Y1",
+      "ip": "192.168.254.1",
+      "lastAccess": "2026-01-20 01:22:09.852333",
+      "name": "راوتر (192.168.254.1)",
+      "ownerId": "AP3A_240905_015_A2",
+      "password": "775359969",
+      "port": 8765,
+      "username": "11"
+    },
+    "HFA091BT3E0": {
+      "firstAccess": "2026-01-14 02:40:34.204619",
+      "id": "HFA091BT3E0",
+      "ip": "10.0.0.1",
+      "lastAccess": "2026-01-22 01:33:05.686735",
+      "name": "راوتر التوزيع",
+      "ownerId": "AP3A_240905_015_A2",
+      "password": "asem773361095",
+      "port": 8728,
+      "username": "asem"
+    },
+    "RTR_001": {
+      "firstAccess": "2026-01-13 22:35:00",
+      "id": "RTR_001",
+      "ip": "192.168.88.1",
+      "lastAccess": "2026-01-13 23:10:00",
+      "name": "الراوتر الرئيسي",
+      "ownerId": "771234567",
+      "password": "password123",
+      "port": 8728,
+      "username": "admin"
+    }
+  },
+  "update": {
+    "link": "https://play.google.com/store/apps/details?id=com.hypertik.app",
+    "version": "1.0.12",
+    "whatnew": "مميزات جديدة"
+  },
+  "users": {
+    "AP3A_240905_015_A2": {
+      "deviceId": "AP3A_240905_015_A2",
+      "firstLogin": "2026-01-19 10:43:25.961031",
+      "lastLogin": "2026-01-21 18:44:19.532559",
+      "model": "Android Device",
+      "name": "مستخدم تجريبي",
+      "networkName": "بدون شبكة",
+      "routersID": {
+        "HEN08KQX4Y1": true,
+        "HFA091BT3E0": true
+      },
+      "trialPlan": {
+        "allowMultiAccess": false,
+        "endDate": "2026-01-29",
+        "maxBulkAdd": 5,
+        "maxBulkCard": 5,
+        "maxDevices": 1,
+        "maxExports": 7,
+        "maxFetches": 1,
+        "maxRouters": 2,
+        "name": "تجربة الجهاز",
+        "startDate": "2026-01-21"
+      },
+      "usage": {
+        "bulk_cards": 2,
+        "exports": 0,
+        "fetches": 2
+      }
+    },
+    "DEVICE_ID_ABC123": {
+      "deviceId": "DEVICE_ID_ABC123",
+      "firstLogin": "2026-01-13 22:30:00",
+      "lastLogin": "2026-01-13 23:10:00",
+      "model": "Samsung S21",
+      "phone": "771234567",
+      "trialPlan": {
+        "allowMultiAccess": false,
+        "endDate": "2026-01-20",
+        "maxBulkAdd": 5,
+        "maxDevices": 1,
+        "maxExports": 7,
+        "maxFetches": 2,
+        "maxRouters": 1,
+        "name": "تجربة الجهاز",
+        "startDate": "2026-01-13"
+      },
+      "usage": {
+        "exports": 0,
+        "fetches": 0
+      }
+    },
+    "PPR1_180610_011": {
+      "deviceId": "PPR1_180610_011",
+      "firstLogin": "2026-01-18 17:40:59.482328",
+      "lastLogin": "2026-01-18 17:40:59.482328",
+      "model": "Android Device",
+      "phone": "",
+      "routersID": {
+        "placeholder": true
+      },
+      "trialPlan": {
+        "allowMultiAccess": false,
+        "endDate": "2026-01-25",
+        "maxBulkCard": 5,
+        "maxDevices": 1,
+        "maxExports": 7,
+        "maxFetches": 7,
+        "maxRouters": 1,
+        "name": "تجربة الجهاز",
+        "startDate": "2026-01-18"
+      },
+      "usage": {
+        "bulk_cards": 0,
+        "exports": 0,
+        "fetches": 0
+      }
+    },
+    "SP1A_210812_016": {
+      "deviceId": "SP1A_210812_016",
+      "firstLogin": "2026-01-21 17:54:15.215125",
+      "lastLogin": "2026-01-21 17:54:15.215125",
+      "model": "Android Device",
+      "phone": "",
+      "routersID": {
+        "placeholder": true
+      },
+      "trialPlan": {
+        "allowMultiAccess": false,
+        "endDate": "2026-01-28",
+        "maxBulkAdd": 5,
+        "maxBulkCard": 5,
+        "maxDevices": 1,
+        "maxExports": 7,
+        "maxFetches": 7,
+        "maxRouters": 1,
+        "name": "تجربة الجهاز",
+        "startDate": "2026-01-21"
+      },
+      "usage": {
+        "bulk_cards": 0,
+        "exports": 0,
+        "fetches": 0
+      }
+    },
+    "T_R4T2_1753706367": {
+      "deviceId": "T_R4T2_1753706367",
+      "firstLogin": "2026-01-22 00:06:35.703409",
+      "lastLogin": "2026-01-22 00:06:53.285894",
+      "model": "Android Device",
+      "phone": "",
+      "routersID": {
+        "HFA091BT3E0": true
+      },
+      "trialPlan": {
+        "allowMultiAccess": false,
+        "endDate": "2026-01-29",
+        "maxBulkAdd": 5,
+        "maxBulkCard": 5,
+        "maxDevices": 1,
+        "maxExports": 7,
+        "maxFetches": 7,
+        "maxRouters": 1,
+        "name": "تجربة مجانية للجهاز",
+        "startDate": "2026-01-22"
+      },
+      "usage": {
+        "bulk_cards": 0,
+        "exports": 0,
+        "fetches": 0
+      }
+    },
+    "U_R4T2_1751776306": {
+      "deviceId": "U_R4T2_1751776306",
+      "firstLogin": "2026-01-22 01:32:52.096985",
+      "lastLogin": "2026-01-22 01:33:12.191824",
+      "model": "Android Device",
+      "phone": "",
+      "routersID": {
+        "HFA091BT3E0": true
+      },
+      "trialPlan": {
+        "allowMultiAccess": false,
+        "endDate": "2026-01-29",
+        "maxBulkAdd": 5,
+        "maxBulkCard": 5,
+        "maxDevices": 1,
+        "maxExports": 7,
+        "maxFetches": 7,
+        "maxRouters": 1,
+        "name": "تجربة مجانية للجهاز",
+        "startDate": "2026-01-22"
+      },
+      "usage": {
+        "bulk_cards": 0,
+        "exports": 0,
+        "fetches": 1
+      }
+    }
+  }
+}

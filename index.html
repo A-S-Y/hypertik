@@ -1,56 +1,201 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>لوحة إدارة Hyper-Tik</title>
+  <title>Hyper-Tik Premium Admin</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body dir="rtl">
+<body>
   <div id="app">
-    <header>
-      <h1>لوحة إدارة Hyper-Tik</h1>
-      <div id="auth">
-        <button id="btn-signout" style="display:none">تسجيل خروج</button>
+    <!-- Login Section -->
+    <section id="login-section">
+      <div class="glass login-card">
+        <h2>Hyper-Tik</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">لوحة إدارة البيانات المتطورة</p>
+        
+        <div class="input-group">
+          <input id="email" type="email" placeholder="البريد الإلكتروني" />
+        </div>
+        <div class="input-group">
+          <input id="password" type="password" placeholder="كلمة المرور" />
+        </div>
+        
+        <button id="btn-login" class="btn-primary">دخول للمنصة</button>
+        <div id="login-msg" style="margin-top: 20px; font-size: 0.9rem;" class="muted"></div>
       </div>
-    </header>
+    </section>
 
-    <main>
-      <section id="login-section">
-        <h2>تسجيل دخول المسؤول</h2>
-        <input id="email" placeholder="Email" />
-        <input id="password" type="password" placeholder="Password" />
-        <button id="btn-login">دخول</button>
-        <div id="login-msg" class="muted"></div>
+    <!-- Admin Dashboard (Hidden by default) -->
+    <aside class="sidebar glass" id="sidebar" style="display:none">
+      <div class="sidebar-logo">Hyper-tik</div>
+      
+      <nav>
+        <a href="#" class="nav-item active" id="nav-dashboard">
+          <span class="icon">📊</span> <span>لوحة التحكم</span>
+        </a>
+        <a href="#" class="nav-item" id="nav-accounts">
+          <span class="icon">👥</span> <span>الحسابات</span>
+        </a>
+        <a href="#" class="nav-item" id="nav-logs">
+          <span class="icon">📜</span> <span>السجلات</span>
+        </a>
+      </nav>
+
+      <div style="margin-top: auto;">
+        <button id="btn-signout" class="nav-item" style="width: 100%; background: none; border: none; cursor: pointer;">
+          <span class="icon">🚪</span> <span>تسجيل خروج</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="main-content" style="display:none">
+      <header>
+        <div>
+          <h1 id="page-title">لوحة التحكم</h1>
+          <p style="color: var(--text-muted);">أهلاً بك في نظام إدارة Hyper-Tik</p>
+        </div>
+        <div class="user-profile">
+          <div style="text-align: left;">
+            <div id="admin-name" style="font-weight: 600;">المشرف العام</div>
+            <div id="admin-email" style="font-size: 0.8rem; color: var(--text-muted);">admin@hypertik.com</div>
+          </div>
+          <div class="glass" style="width: 45px; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">👨‍💻</div>
+        </div>
+      </header>
+
+      <!-- Dashboard View -->
+      <section id="dashboard-view">
+        <div class="stats-grid" id="stats-grid">
+          <div class="glass stat-card">
+            <h4>إجمالي الحسابات</h4>
+            <div class="value" id="total-accounts">0</div>
+          </div>
+          <div class="glass stat-card">
+            <h4>الحسابات المميزة</h4>
+            <div class="value" id="premium-accounts">0</div>
+          </div>
+          <div class="glass stat-card">
+            <h4>الحسابات النشطة</h4>
+            <div class="value" id="active-accounts">0</div>
+          </div>
+        </div>
+
+        <div class="glass" style="padding: 30px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h3>آخر الحسابات المسجلة</h3>
+            <button class="btn-primary" style="width: auto; padding: 10px 20px; font-size: 0.9rem;" onclick="showView('accounts-view')">مشاهدة الكل</button>
+          </div>
+          <div class="table-container">
+            <table id="recent-accounts-table">
+              <thead>
+                <tr><th>الهاتف</th><th>الاسم</th><th>الشبكة</th><th>الحالة</th><th>إجراء</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
-      <section id="dashboard" style="display:none">
-        <h2>لوحة</h2>
-        <div id="stats" class="card"></div>
+      <!-- Accounts List View -->
+      <section id="accounts-view" style="display:none">
+        <div class="glass" style="padding: 30px; margin-bottom: 30px;">
+          <div style="display: flex; gap: 20px; align-items: center;">
+            <div style="flex: 1;">
+              <input id="filter" placeholder="بحث برقم الهاتف، الاسم، أو اسم الشبكة..." />
+            </div>
+            <button class="glass" style="padding: 15px 30px;">فلاتر متقدمة</button>
+          </div>
+        </div>
 
-        <h3>قائمة الحسابات</h3>
-        <input id="filter" placeholder="بحث برقم الهاتف أو الاسم" />
-        <table id="accounts-table" border="1">
-          <thead>
-            <tr><th>الهاتف</th><th>الاسم</th><th>الشبكة</th><th>نشط</th><th>خطة</th><th>إجراءات</th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="glass table-container">
+          <table id="accounts-table">
+            <thead>
+              <tr><th>الهاتف</th><th>الاسم</th><th>اسم الشبكة</th><th>الخطة</th><th>الحالة</th><th>تاريخ الاشتراك</th><th>إجراءات</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </section>
 
-      <section id="account-detail" style="display:none">
-        <button id="back-to-list">العودة إلى القائمة</button>
-        <h2>تفاصيل الحساب: <span id="detail-phone"></span></h2>
-        <div id="detail-general" class="card"></div>
-        <div id="detail-plan" class="card"></div>
-        <div id="detail-routers" class="card"></div>
-        <div id="detail-employees" class="card"></div>
+      <!-- Logs View -->
+      <section id="logs-view" style="display:none">
+          <div class="glass" style="padding: 30px;">
+              <h3>سجلات الأنشطة الأخيرة</h3>
+              <div class="table-container">
+                  <table id="logs-table">
+                      <thead>
+                          <tr><th>الوقت</th><th>نوع الإجراء</th><th>التفاصيل</th><th>المعرف</th></tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+              </div>
+          </div>
+      </section>
+
+      <!-- Account Detail View -->
+      <section id="account-detail-view" style="display:none">
+        <div class="detail-header">
+          <button class="glass" style="padding: 10px 20px;" onclick="showView('accounts-view')">← العودة للقائمة</button>
+          <div style="display: flex; gap: 15px;">
+            <button id="toggle-active" class="glass" style="padding: 10px 20px;"></button>
+            <button id="delete-account" class="glass" style="padding: 10px 20px; color: var(--accent);">حذف الحساب</button>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="left-col">
+            <div class="glass detail-card">
+              <h2 id="detail-phone" style="margin-bottom: 10px;"></h2>
+              <p id="detail-name" style="color: var(--text-muted); margin-bottom: 20px;"></p>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="glass" style="padding: 20px; background: rgba(0,0,0,0.1);">
+                  <div style="color: var(--text-muted); font-size: 0.8rem;">اسم الشبكة</div>
+                  <div id="detail-network-name" style="font-weight: 600;"></div>
+                </div>
+                <div class="glass" style="padding: 20px; background: rgba(0,0,0,0.1);">
+                  <div style="color: var(--text-muted); font-size: 0.8rem;">معرف الشبكة العام</div>
+                  <div id="detail-public-id" style="font-weight: 600;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass detail-card">
+              <h3>الخطة الحالية</h3>
+              <div id="plan-info" style="margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                  <span>نوع الخطة:</span>
+                  <span id="detail-plan-name" class="badge badge-primary"></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                  <span>تاريخ الانتهاء:</span>
+                  <span id="detail-plan-end"></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>أقصى عدد للراوترات:</span>
+                    <span id="detail-max-routers"></span>
+                </div>
+                <button id="btn-edit-plan" class="btn-primary" style="margin-top: 20px;">ترقية أو تعديل الخطة</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-col">
+            <div class="glass detail-card">
+              <h3>الراوترات المربوطة</h3>
+              <ul id="detail-routers-list" style="list-style: none; margin-top: 20px;"></ul>
+              <button id="btn-add-router" class="glass" style="width: 100%; padding: 10px; margin-top: 20px; border-style: dashed;">+ إضافة راوتر</button>
+            </div>
+
+            <div class="glass detail-card">
+                <h3>الموظفين</h3>
+                <ul id="detail-employees-list" style="list-style: none; margin-top: 20px;"></ul>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
-
-    <footer>
-      <small>مصمم لإدارة بيانات Realtime DB — تأكد من قواعد الأمان قبل الاستخدام في الإنتاج.</small>
-    </footer>
   </div>
 
   <script type="module" src="src/app.js"></script>
